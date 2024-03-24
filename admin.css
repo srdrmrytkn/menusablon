@@ -1,0 +1,237 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+
+    background: url('./Images/arkaplan.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+header{
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 1px ;
+    margin: 0;
+}
+
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #eee;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+select, input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 8px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+h3 {
+    margin-top: 40px;
+    text-align: center;
+}
+
+#listCategory {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+#productList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    overflow: hidden;
+
+    
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 15px;
+    text-align: left;
+    position: relative;
+}
+
+.product-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.product-item div {
+    flex-grow: 1;
+}
+
+.product-item span {
+    display: block;
+    color: #333;
+    font-size: 18px;
+}
+
+.product-item p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.product-item .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.product-item button {
+    padding: 6px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+.product-item button.edit {
+    width: 150px;
+    background-color: #5cb85c;
+    color: #fff;
+}
+
+.product-item button.delete {
+    width: 70px;
+    background-color: #e44d26;
+    color: #fff;
+}
+
+.product-item button:hover {
+    background-color: #ddd;
+}
+
+#productListHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: #333;
+    padding: 10px;
+    color: #fff;
+}
+
+#productListHeader h3 {
+    font-size: 24px;
+    margin: 0;
+}
+
+#productListHeader select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#productListHeader select:hover {
+    border-color: #555;
+}
+
+#productListHeader label {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+
+#productList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+
+.product-item:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#confirmationModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+#confirmationBox {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#confirmationText {
+    margin-bottom: 20px;
+}
+
+#confirmationButtons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#confirmationButtons button {
+    width: 48%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+#confirmationButtons button.yes {
+    background-color: #5cb85c;
+    color: #fff;
+}
+
+#confirmationButtons button.no {
+    background-color: #e44d26;
+    color: #fff;
+}
+
+#confirmationButtons button:hover {
+    background-color: #ddd;
+}

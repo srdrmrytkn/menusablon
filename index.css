@@ -1,0 +1,221 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('./Images/arkaplan.png') no-repeat center center fixed;
+    background-size: cover;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.card {
+    background-color: #eee;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-navbar {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.menu-navbar button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.menu-navbar button:hover {
+    background-color: #555;
+}
+
+.menu-category {
+    display: none;
+}
+.menu-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+}
+.product-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px; /* Küçültülen padding */
+    margin: 10px; /* Eklendi: Daha fazla boşluk */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+/* Ürün card'ındaki ürün detayları */
+.product-info {
+    overflow: hidden;
+    word-wrap: break-word; /* Kelimeleri kır */
+    word-break: break-all; /* Uzun kelimeleri kır */
+}
+
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-image {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+    flex-shrink: 0; /* Resmin küçülmemesi için ekledik */
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+
+
+
+.telefon-link, a {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #333;
+    border: 2px solid #333;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.telefon-link:hover, a:hover {
+    background-color: #f00;
+    color: #fff;
+}
+/* Popup stil ayarları */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    background-color: #fff; /* Pop-up arka plan rengi */
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    color: #000; /* Pop-up içindeki metin rengi */
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Geçiş efekti */
+}
+
+.popup-content {
+    display: flex;
+   
+    align-items: center; /* Dikeyde ortala */
+}
+
+.popup .product-image {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-right: 20px;
+    flex-shrink: 0; /* Resmin küçülmemesi için ekledik */
+    float: left;
+}
+
+.popup .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    float: left;
+}
+/* Kapatma düğmesi */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #000; /* Kapatma düğmesi rengi */
+}
+
+
+
+
+
+/* Ürün detayları */
+.popup .product-details {
+    overflow: hidden;
+
+
+}
+
+.popup .product-info {
+    float: left;
+}
+
+.popup h2 {
+    margin-top: 0;
+}
+/* Popup içindeki ürün fiyatı */
+.popup .product-price {
+    font-weight: bold; /* Kalın (bold) yazı tipi */
+}
+
+/* Popup açılma animasyonu */
+.popup.open {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}

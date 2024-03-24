@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli</title>
+    <link rel="icon"  type="image" href="./Images/katıktitle.png">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header> <img src="Images/katıktitle.png" alt="Restoran Logo" class="logo" width="150px">
+    <h2>Admin Paneli</h2>
+</header>
+
+    <form id="addProductForm" enctype="multipart/form-data">
+        <label for="category">Kategori:</label>
+        <select id="category" name="category">
+            <option value="drinks">İçecekler</option>
+            <option value="wraps">Dürümler</option>
+            <option value="menu">Menüler</option>
+        </select>
+        <br>
+
+        <label for="name">Ürün Adı:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+
+        <label for="description">Açıklama:</label>
+        <textarea id="description" name="description" rows="4" required></textarea>
+        <br>
+
+        <label for="price">Fiyat:</label>
+        <input type="number" id="price" name="price" step="0.01" required>
+        <br>
+
+        <label for="image">Resim Dosyası:</label>
+        <input type="text" id="image" name="image" required>
+        <br>
+
+        <input type="hidden" id="productId" name="productId">
+        
+        <button type="button" id="addProductButton" onclick="addProduct()">Ürün Ekle</button>
+        <button type="button" id="updateProductButton" onclick="updateProduct()" style="display:none;">Ürün Güncelle</button>
+    </form>
+
+    <div id="productListHeader">
+        <h3>Ürünleri Listele</h3>
+        <label for="listCategory">Kategori Seç:</label>
+        <select id="listCategory" name="listCategory" onchange="listProducts()">
+            <option value="drinks">İçecekler</option>
+            <option value="wraps">Dürümler</option>
+            <option value="menu">Menüler</option>
+        </select>
+    </div>
+    
+
+    <div id="productList"></div>
+
+    <div id="confirmationModal">
+        <div id="confirmationBox">
+            <p id="confirmationText"></p>
+            <div id="confirmationButtons">
+                <button class="yes" id="confirmDeleteButton">Evet</button>
+                <button class="no" id="cancelDeleteButton">Hayır</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            listProducts();
+        });
+
+        function listProducts() {
+            var selectedCategory = document.getElementById('listCategory').value;
+
+            fetch(`http://localhost:3000/${selectedCategory}/`)
+                .then(response => response.json())
+                .then(data => {
+                    var productList = document.getElementById('productList');
+                    productList.innerHTML = '';
+
+                    data.forEach(function (product) {
+                        var productItem = document.createElement("div");
+                        productItem.classList.add("product-item");
+
+                        productItem.innerHTML = `
+                            <img src='Images/${product.image}' alt='${product.name}'>
+                            <div>
+                                <span>${product.name}</span>
+                                <p class:"product-description">${product.description}</p>
+                                <span>₺${product.price.toFixed(2)}</span>
+                            </div>
+                            <div class="buttons">
+                                <button class='edit' onclick="editProduct('${selectedCategory}', '${product.id}')">Düzenle</button>
+                                <button class='delete' onclick="showDeleteConfirmation('${product.name}', '${selectedCategory}', '${product.id}')">Sil</button>
+                            </div>
+                        `;
+
+                        productList.appendChild(productItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching product data:', error));
+        }
+
+        function addProduct() {
+            const category = document.getElementById('category').value;
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const price = document.getElementById('price').value;
+            const image = document.getElementById('image').value;
+
+            const newProduct = {
+                name,
+                description,
+                price: parseFloat(price),
+                image
+            };
+
+            fetch(`http://localhost:3000/${category}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newProduct),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product added:', data);
+                listProducts(); 
+                clearForm();
+            })
+            .catch(error => {
+                console.error('Error adding product:', error);
+            });
+        }
+
+        function updateProduct() {
+            const category = document.getElementById('category').value;
+            const productId = document.getElementById('productId').value;
+            const name = document.getElementById('name').value;
+            const description = document.getElementById('description').value;
+            const price = document.getElementById('price').value;
+            const image = document.getElementById('image').value;
+
+            const updatedProduct = {
+                name,
+                description,
+                price: parseFloat(price),
+                image
+            };
+
+            fetch(`http://localhost:3000/${category}/${productId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedProduct),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product updated:', data);
+                listProducts(); 
+                clearForm();
+                switchButton('addProductButton', 'updateProductButton');
+            })
+            .catch(error => {
+                console.error('Error updating product:', error);
+            });
+        }
+
+        function deleteProduct(category, productId) {
+            fetch(`http://localhost:3000/${category}/${productId}`, {
+                method: 'DELETE',
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product deleted:', data);
+                listProducts(); 
+            })
+            .catch(error => {
+                console.error('Error deleting product:', error);
+            });
+        }
+
+        function editProduct(category, productId) {
+            fetch(`http://localhost:3000/${category}/${productId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('productId').value = productId;
+                    document.getElementById('category').value = category;
+                    document.getElementById('name').value = data.name;
+                    document.getElementById('description').value = data.description;
+                    document.getElementById('price').value = data.price;
+                    document.getElementById('image').value = data.image;
+
+                    switchButton('updateProductButton', 'addProductButton');
+                })
+                .catch(error => console.error('Error fetching product data for editing:', error));
+        }
+
+        function switchButton(showButtonId, hideButtonId) {
+            document.getElementById(showButtonId).style.display = 'block';
+            document.getElementById(hideButtonId).style.display = 'none';
+        }
+
+        function clearForm() {
+            document.getElementById('productId').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('description').value = '';
+            document.getElementById('price').value = '';
+            document.getElementById('image').value = '';
+
+            switchButton('addProductButton', 'updateProductButton');
+        }
+
+        function showDeleteConfirmation(productName, category, productId) {
+            const confirmationText = ` "${productName}" isimli ürünü silmek istediğinize emin misiniz?`;
+            document.getElementById('confirmationText').textContent = confirmationText;
+
+            document.getElementById('confirmationModal').style.display = 'flex';
+
+            document.getElementById('confirmDeleteButton').onclick = function () {
+                deleteProduct(category, productId);
+                hideConfirmationModal();
+            };
+
+            document.getElementById('cancelDeleteButton').onclick = function () {
+                hideConfirmationModal();
+            };
+        }
+
+        function hideConfirmationModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

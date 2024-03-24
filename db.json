@@ -1,0 +1,57 @@
+{
+  "drinks": [
+    {
+      "name": "asdasd",
+      "description": "asdasd",
+      "price": 322,
+      "image": "cola.jpg",
+      "id": "bd72"
+    },
+    {
+      "name": "24",
+      "description": "2",
+      "price": 2,
+      "image": "",
+      "id": "eb47"
+    },
+    {
+      "id": "01f2",
+      "name": "22323",
+      "description": "232",
+      "price": 23223,
+      "image": "22313"
+    },
+    {
+      "id": "4715",
+      "name": "22",
+      "description": "22",
+      "price": 2,
+      "image": "2"
+    },
+    {
+      "id": "f938",
+      "name": "",
+      "description": "",
+      "price": null,
+      "image": ""
+    }
+  ],
+  "wraps": [
+    {
+      "name": "222",
+      "description": "22",
+      "price": 5555,
+      "image": "durum.jpg",
+      "id": "4482"
+    }
+  ],
+  "menu": [
+    {
+      "id": "ec94",
+      "name": "21323",
+      "description": "12312",
+      "price": 321,
+      "image": "durummenu.png"
+    }
+  ]
+}
